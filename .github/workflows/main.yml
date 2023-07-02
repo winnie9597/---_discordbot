@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  deployment:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    steps:
+    - name: install ssh key
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: update remote program
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DEPLOY_DIR }} && git pull"
+    - name: cleanup ssh key
+      run: rm -rf ~/.ssh/
