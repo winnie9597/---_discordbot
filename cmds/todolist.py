@@ -17,7 +17,7 @@ class TodoList(Cog_Extension):
             await ctx.send("此待辨事項已存在")
         else:
             self.todo.append(item)
-            await ctx.send("此待辨事項已儲存")
+            await ctx.send("此待辨事項已儲存/")
 
     # Remove todolist
     # item 是要移除的待辨事項
