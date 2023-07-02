@@ -14,7 +14,7 @@ class TodoList(Cog_Extension):
     @commands.command()
     async def AddTodoList(self, ctx, item):
         if item in self.todo:
-            await ctx.send("此待辨事項已存在")
+            await ctx.send("此待辨事項已存在/")
         else:
             self.todo.append(item)
             await ctx.send("此待辨事項已儲存/")
